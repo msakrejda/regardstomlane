@@ -6,10 +6,18 @@ $stdout.sync = $stderr.sync = true
 
 TOM_EMAIL = ENV.fetch("TOM_EMAIL")
 PGSQL_HACKERS = ENV.fetch("PGSQL_HACKERS_LIST")
+USERNAME = ENV.fetch("USERNAME")
+PASSWORD = ENV.fetch("PASSWORD")
+
 MAX_LEN = 144
+
+use Rack::Auth::Basic do |username, password|
+  username == USERNAME && password == PASSWORD
+end
 
 post '/message' do
   message = JSON.parse(request.body.read)
+  puts "received message: #{message}"
   headers = message['headers']
   if headers
     if headers['From'] && headers['From'].include?(TOM_EMAIL) &&
@@ -25,6 +33,7 @@ post '/message' do
           puts "\t#{candidate_tweet}"
           puts "extracted from:\n#{body}"
           puts "*" * 80
+          status 201
         else
           puts "*" * 80
           puts "last sentence too long!"
@@ -36,6 +45,5 @@ post '/message' do
         puts "Could not determine last sentence in:\n#{body}"
       end
     end
-    status 201
   end
 end
