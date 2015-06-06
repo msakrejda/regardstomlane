@@ -15,7 +15,7 @@ use Rack::Auth::Basic do |username, password|
   username == USERNAME && password == PASSWORD
 end
 
-post '/message' do
+post '/messages' do
   message = JSON.parse(request.body.read)
   puts "received message: #{message}"
   headers = message['headers']
