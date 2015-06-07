@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'mail'
 require_relative 'helpers'
+require 'pp'
 
 $stdout.sync = $stderr.sync = true
 
@@ -17,7 +18,7 @@ end
 
 post '/messages' do
   message = JSON.parse(request.body.read)
-  puts "received message: #{message}"
+  pp "received message:\n#{message}"
   headers = message['headers']
   if headers
     if headers['From'] && headers['From'].include?(TOM_EMAIL) &&
