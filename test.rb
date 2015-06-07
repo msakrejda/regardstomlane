@@ -5,6 +5,7 @@ tests = [
  [ "hello? regards, tom lane", "hello?" ],
  [ "hello! regards, tom lane", "hello!" ],
  [ "hello world. regards, tom lane", "hello world." ],
+ [ "hello\nworld. regards, tom lane", "hello world." ],
  [ "hello world. goodbye. regards, tom lane", "goodbye." ],
  [ "hello world. goodbye.  regards, tom lane", "goodbye." ],
  [ "hello world.\ngoodbye. regards, tom lane", "goodbye." ],
@@ -19,7 +20,7 @@ failed = 0
 
 tests.each_with_index do |(body, expected), index|
   print "test #{index}: "
-  result = last_sentence(body)
+  result = find_last_sentence(body)
   if result == expected
     puts "ok"
   else
