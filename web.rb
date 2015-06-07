@@ -6,7 +6,7 @@ require 'pp'
 $stdout.sync = $stderr.sync = true
 
 TOM_EMAIL = ENV.fetch("TOM_EMAIL")
-PGSQL_HACKERS = ENV.fetch("PGSQL_HACKERS_LIST")
+MAILING_LISTS = ENV.fetch("MAILING_LISTS").split(',')
 USERNAME = ENV.fetch("USERNAME")
 PASSWORD = ENV.fetch("PASSWORD")
 
@@ -22,7 +22,7 @@ post '/messages' do
   headers = message['headers']
   if headers
     if headers['From'] && headers['From'].include?(TOM_EMAIL) &&
-        headers['List-ID'] && headers['List-ID'].include?(PGSQL_HACKERS)
+        headers['List-ID'] && MAILING_LISTS.any? { |list| headers['List-ID'].include?(list) }
       # TODO: check for html with fallback to plain just in case hell
       # freezes over and Tom starts sending html e-mail
       body = message['plain']
