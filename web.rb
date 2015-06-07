@@ -18,7 +18,8 @@ end
 
 post '/messages' do
   message = JSON.parse(request.body.read)
-  pp "received message:\n#{message}"
+  puts "received message:"
+  pp message
   headers = message['headers']
   if headers
     if headers['From'] && headers['From'].include?(TOM_EMAIL) &&
