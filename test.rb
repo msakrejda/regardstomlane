@@ -14,6 +14,8 @@ tests = [
    "c.c.h. pounder is an actor." ],
  [ "hello world. c.c.h. pounder is an actor. b.d. wong is also an actor. regards, tom lane",
    "b.d. wong is also an actor." ],
+ [ "Something something. There's definitely a CommandCounterIncrement in exec_execute_message ...\nregards, tom lane",
+   "There's definitely a CommandCounterIncrement in exec_execute_message ..."]
 ]
 
 failed = 0
@@ -25,6 +27,7 @@ tests.each_with_index do |(body, expected), index|
     puts "ok"
   else
     failed += 1
+    result = '<nil>' if result.nil?
     puts "fail: expected\n\t#{expected}\ngot\n\t#{result}"
   end
 end
