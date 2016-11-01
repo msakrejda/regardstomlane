@@ -15,7 +15,9 @@ tests = [
  [ "hello world. c.c.h. pounder is an actor. b.d. wong is also an actor. regards, tom lane",
    "b.d. wong is also an actor." ],
  [ "Something something. There's definitely a CommandCounterIncrement in exec_execute_message ...\nregards, tom lane",
-   "There's definitely a CommandCounterIncrement in exec_execute_message ..."]
+   "There's definitely a CommandCounterIncrement in exec_execute_message ..."],
+ [ "Unless I'm missing something this doesn't really expose a user of this functionality?\n\nGreetings,\n\nAndres Freund",
+   "Unless I'm missing something this doesn't really expose a user of this functionality?"]
 ]
 
 failed = 0
