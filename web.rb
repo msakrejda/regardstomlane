@@ -12,7 +12,7 @@ MAILING_LISTS = ENV.fetch("MAILING_LISTS").split(',')
 USERNAME = ENV.fetch("USERNAME")
 PASSWORD = ENV.fetch("PASSWORD")
 
-MAX_LEN = 140
+MAX_LEN = ENV.fetch("MAX_TWEET_LENGTH", 280)
 
 twitter = Twitter::REST::Client.new do |config|
   config.consumer_key        = ENV.fetch('TWITTER_CONSUMER_KEY')
