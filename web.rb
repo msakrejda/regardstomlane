@@ -32,7 +32,7 @@ post '/messages' do
   headers = message['headers']
   if headers
     from = headers.fetch('From', '')
-    list = headers.fetch('List-ID', '')
+    list = headers.fetch('List-Id', '')
     if from.include?(TOM_EMAIL) && MAILING_LISTS.any? { |l| list.include?(l) }
       # TODO: check for html with fallback to plain just in case hell
       # freezes over and Tom starts sending html e-mail
