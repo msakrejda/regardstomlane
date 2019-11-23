@@ -63,7 +63,15 @@ Dunno about that, but certainly somebody fat-fingered a refactoring
 there.  The 9.6 code looks quite different but doesn't seem to be
 doing anything silly.
 
-regards, tom lane), "The 9.6 code looks quite different but doesn't seem to be doing anything silly." ]
+regards, tom lane), "The 9.6 code looks quite different but doesn't seem to be doing anything silly." ],
+    [ %q(*** WARNING *** The program 'postgres' uses the Apple Bonjour compatibility layer of Avahi.
+*** WARNING *** Please fix your application to use the native API of Avahi!
+*** WARNING *** For more information see <http://0pointer.de/avahi-compat?s=libdns_sd&e=postgres>
+2017-11-08 17:58:42.451 EST [23762] LOG:  DNSServiceRegister() failed: error code -65540
+
+I wonder which libdns_sd you are using.
+
+                        regards, tom lane), "I wonder which libdns_sd you are using." ]
     ]
 
   tests.each do |(body, expected)|
