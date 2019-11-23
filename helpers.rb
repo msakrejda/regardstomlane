@@ -1,10 +1,16 @@
-def maybe_starts_sentence(token)
+def starts_sentence?(token)
   !token.nil? && token =~ /^[A-Z]/
 end
 
-def maybe_ends_sentence(token)
-  token !~ /\A(?:[A-Z]\.)+\z/ &&
+def ends_sentence?(token)
+  # True if it is an ellipsis (as its own token since Tom separates it
+  # with a space), or is *not* an initialism/acronym and it does start
+  # with a letter and ends with a period, question mark or exclamation
+  # mark, optionally followed by a closing parenthesis.
+  token == '...' || (
+    token !~ /\A(?:[A-Z]\.)+\z/ &&
     token =~ /[a-zA-Z]+(?:[.?!]\)?| ...)/
+  )
 end
 
 def find_last_sentence(email_body)
@@ -22,15 +28,13 @@ def find_last_sentence(email_body)
   # 3. Go backwards through tokens starting at right before signature
   previous = nil
   parts.reverse.take_while do |token|
-    # 4. Stop at token that ends the previous sentence:
-    #    a. is the following (i.e., previous, since we're going backwards) word capitalized?
-    #    b. if so, does this word end in a period, question mark or exclamation mark,
-    #       optionally followed by a closing parenthesis?
-    keep_going = !(maybe_starts_sentence(previous) && maybe_ends_sentence(token))
+    # 4. Stop at token that ends the previous sentence if the last
+    #    token starts the current sentence
+    stop = starts_sentence?(previous) && ends_sentence?(token)
     if token =~ /\S+/
       previous = token
     end
-    keep_going
+    !stop
   end.reverse.map do |token|
     token == "\n" ? " " : token
   end.join.strip
