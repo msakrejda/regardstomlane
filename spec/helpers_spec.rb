@@ -73,7 +73,13 @@ I wonder which libdns_sd you are using.
 Some bogus content to force a failure.
 
 +1 for somebody trying that (I'm not volunteering, though).
-			regards, tom lane), "+1 for somebody trying that (I'm not volunteering, though)." ]
+			regards, tom lane), "+1 for somebody trying that (I'm not volunteering, though)." ],
+    [ %q(> Similarly for the changes in create_minmaxagg_path().
+
+I'm sure you realize that's because the estimate is already just one
+row ... but sure, we can spell that out.
+
+                        regards, tom lane), "I'm sure you realize that's because the estimate is already just one row ... but sure, we can spell that out." ]
     ]
 
   tests.each do |(body, expected)|
