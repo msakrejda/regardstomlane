@@ -1,5 +1,5 @@
 def starts_sentence?(token)
-  !token.nil? && token =~ /^[A-Z]/
+  !token.nil? && token =~ /^(?:[A-Z]|\+1)/
 end
 
 def ends_sentence?(token)

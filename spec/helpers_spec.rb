@@ -68,7 +68,12 @@ regards, tom lane), "The 9.6 code looks quite different but doesn't seem to be d
 
 I wonder which libdns_sd you are using.
 
-                        regards, tom lane), "I wonder which libdns_sd you are using." ]
+                        regards, tom lane), "I wonder which libdns_sd you are using." ],
+    [ %q(> reasons mentioned in the comments in gen_qsort_tuple.pl, viz:
+Some bogus content to force a failure.
+
++1 for somebody trying that (I'm not volunteering, though).
+			regards, tom lane), "+1 for somebody trying that (I'm not volunteering, though)." ]
     ]
 
   tests.each do |(body, expected)|
