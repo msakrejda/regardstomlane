@@ -25,6 +25,11 @@ login to an account would be a security fail as well.
 
 
 			regards, tom lane), "Which is why we invented the ENCRYPTED PASSWORD syntax, as well as psql's \\password command ... but using that approach for actual login to an account would be a security fail as well." ],
+    [ %q(Merlin Moncure <mmoncure(at)gmail(dot)com> writes:
+> This is working great.  Is there anything left for me to do here?
+
+Nope, it's committed.
+			regards, tom lane), "Nope, it's committed." ]
     ]
 
   tests.each do |(body, expected)|
