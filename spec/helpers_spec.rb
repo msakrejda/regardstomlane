@@ -46,7 +46,15 @@ this context, because when you cast the ROW() result to the
 ap.validate_crtr_line_items$inv_lines_rt composite type, that type
 is what determines the column names.
 
-        regards, tom lane), "Even if it were allowed in ROW(), it would be totally pointless in this context, because when you cast the ROW() result to the ap.validate_crtr_line_items$inv_lines_rt composite type, that type is what determines the column names." ]
+        regards, tom lane), "Even if it were allowed in ROW(), it would be totally pointless in this context, because when you cast the ROW() result to the ap.validate_crtr_line_items$inv_lines_rt composite type, that type is what determines the column names." ],
+    [ %q(What might be worth thinking about is allowing the syslogger process to
+inherit the postmaster's OOM-kill-proofness setting, instead of dropping
+down to the same vulnerability as the postmaster's other child processes.
+That presumes that this was an otherwise-unjustified OOM kill, which
+I'm not quite sure of ... but it does seem like a situation that could
+arise from time to time.
+
+regards, tom lane), "That presumes that this was an otherwise-unjustified OOM kill, which I'm not quite sure of ... but it does seem like a situation that could arise from time to time." ]
     ]
 
   tests.each do |(body, expected)|
