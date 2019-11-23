@@ -1,3 +1,12 @@
+def maybe_starts_sentence(token)
+  !token.nil? && token =~ /^[A-Z]/
+end
+
+def maybe_ends_sentence(token)
+  token !~ /\A(?:[A-Z]\.)+\z/ &&
+    token =~ /[a-zA-Z]+(?:[.?!]\)?| ...)/
+end
+
 def find_last_sentence(email_body)
   # 1. Match every line before "regards, tom lane" going back
   #    to just after after the last >quoted line (if any). We
@@ -15,13 +24,14 @@ def find_last_sentence(email_body)
   parts.reverse.take_while do |token|
     # 4. Stop at token that ends the previous sentence:
     #    a. is the following (i.e., previous, since we're going backwards) word capitalized?
-    #    b. if so, does this word end in a period, question mark or exclamation mark and
-    #       start with a lowercase letter?
-    match = previous.nil? || previous !~ /^[A-Z]/ || token !~ /[a-z]+(?:[.?!]| ...)/
+    #    b. if so, does this word end in a period, question mark or exclamation mark,
+    #       optionally followed by a closing parenthesis, and start with a lowercase
+    #       letter?
+    keep_going = !(maybe_starts_sentence(previous) && maybe_ends_sentence(token))
     if token =~ /\S+/
       previous = token
     end
-    match
+    keep_going
   end.reverse.map do |token|
     token == "\n" ? " " : token
   end.join.strip

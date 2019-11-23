@@ -29,7 +29,14 @@ login to an account would be a security fail as well.
 > This is working great.  Is there anything left for me to do here?
 
 Nope, it's committed.
-			regards, tom lane), "Nope, it's committed." ]
+			regards, tom lane), "Nope, it's committed." ],
+    [ %q((Said coverage is only marginally
+better than what we get without running the bloom TAP test, AFAICT.)
+
+It seems like some effort could be put into both shortening this test
+and improving the amount of code it exercises.
+
+                        regards, tom lane), "It seems like some effort could be put into both shortening this test and improving the amount of code it exercises." ]
     ]
 
   tests.each do |(body, expected)|
