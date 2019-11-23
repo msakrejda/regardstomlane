@@ -54,7 +54,16 @@ That presumes that this was an otherwise-unjustified OOM kill, which
 I'm not quite sure of ... but it does seem like a situation that could
 arise from time to time.
 
-regards, tom lane), "That presumes that this was an otherwise-unjustified OOM kill, which I'm not quite sure of ... but it does seem like a situation that could arise from time to time." ]
+regards, tom lane), "That presumes that this was an otherwise-unjustified OOM kill, which I'm not quite sure of ... but it does seem like a situation that could arise from time to time." ],
+    [ %q(Alvaro Herrera  writes:
+> I think odd coding this was introduced recently because of the
+> pg_resetxlog -> pg_resetwal renaming.
+
+Dunno about that, but certainly somebody fat-fingered a refactoring
+there.  The 9.6 code looks quite different but doesn't seem to be
+doing anything silly.
+
+regards, tom lane), "The 9.6 code looks quite different but doesn't seem to be doing anything silly." ]
     ]
 
   tests.each do |(body, expected)|
