@@ -36,7 +36,17 @@ better than what we get without running the bloom TAP test, AFAICT.)
 It seems like some effort could be put into both shortening this test
 and improving the amount of code it exercises.
 
-                        regards, tom lane), "It seems like some effort could be put into both shortening this test and improving the amount of code it exercises." ]
+                        regards, tom lane), "It seems like some effort could be put into both shortening this test and improving the amount of code it exercises." ],
+    [ %q(> Why "AS" is throwing an error ?
+
+"AS" is part of SELECT-list syntax, not ROW(...) syntax.
+
+Even if it were allowed in ROW(), it would be totally pointless in
+this context, because when you cast the ROW() result to the
+ap.validate_crtr_line_items$inv_lines_rt composite type, that type
+is what determines the column names.
+
+        regards, tom lane), "Even if it were allowed in ROW(), it would be totally pointless in this context, because when you cast the ROW() result to the ap.validate_crtr_line_items$inv_lines_rt composite type, that type is what determines the column names." ]
     ]
 
   tests.each do |(body, expected)|
