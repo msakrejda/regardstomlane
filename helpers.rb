@@ -25,8 +25,7 @@ def find_last_sentence(email_body)
     # 4. Stop at token that ends the previous sentence:
     #    a. is the following (i.e., previous, since we're going backwards) word capitalized?
     #    b. if so, does this word end in a period, question mark or exclamation mark,
-    #       optionally followed by a closing parenthesis, and start with a lowercase
-    #       letter?
+    #       optionally followed by a closing parenthesis?
     keep_going = !(maybe_starts_sentence(previous) && maybe_ends_sentence(token))
     if token =~ /\S+/
       previous = token
