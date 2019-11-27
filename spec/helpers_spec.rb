@@ -110,7 +110,15 @@ to introduce some comparable restriction in ecpg.
 that it does fail without the code fix :-).  Other than that, though,
 I think this patch is committable for v11 through HEAD.
 
-			regards, tom lane}, "Other than that, though, I think this patch is committable for v11 through HEAD." ]
+			regards, tom lane}, "Other than that, though, I think this patch is committable for v11 through HEAD." ],
+    [ %q(That seems a bit premature --- the new patch is only a couple of days
+old.  The CF entry should've been moved back to "Needs Review",
+sure.
+
+(Having said that, the end of the month isn't that far away,
+so it may well end up in the next CF anyway.)
+
+			regards, tom lane), "(Having said that, the end of the month isn't that far away, so it may well end up in the next CF anyway.)" ]
     ]
 
   tests.each do |(body, expected)|
