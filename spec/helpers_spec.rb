@@ -79,7 +79,34 @@ Some bogus content to force a failure.
 I'm sure you realize that's because the estimate is already just one
 row ... but sure, we can spell that out.
 
-                        regards, tom lane), "I'm sure you realize that's because the estimate is already just one row ... but sure, we can spell that out." ]
+                        regards, tom lane), "I'm sure you realize that's because the estimate is already just one row ... but sure, we can spell that out." ],
+    [ %q(Thus, in your example, the sub-query should give
+
+regression=# select 1 from dual where 0=1 group by grouping sets(());
+ ?column? 
+----------
+        1
+(1 row)
+
+and therefore it's correct that
+
+regression=# select count(*) from (select 1 from dual where 0=1 group by grouping sets(())) tmp;
+ count 
+-------
+     1
+(1 row)
+
+AFAICS, Oracle and SQL Server are getting it wrong.
+
+			regards, tom lane), "AFAICS, Oracle and SQL Server are getting it wrong." ],
+    [ %q(BTW, in the back of my mind here is Chapman's point that it'd be
+a large step forward in usability if we allowed Unicode escapes
+when the backend encoding is *not* UTF-8.  I think I see how to
+get there once this patch is done, so I definitely would not like
+to introduce some comparable restriction in ecpg.
+
+			regards, tom lane), "I think I see how to get there once this patch is done, so I definitely would not like to introduce some comparable restriction in ecpg." ]
+
     ]
 
   tests.each do |(body, expected)|
