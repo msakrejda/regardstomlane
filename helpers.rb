@@ -10,7 +10,7 @@ def ends_sentence?(token)
   # mark, optionally followed by a closing parenthesis.
   token == "\n\n" || token == '...' || (
     token !~ /\A(?:[A-Z]\.)+\z/ &&
-    token =~ /^[a-zA-Z].+(?:[.?!]\)?| ...)/
+    token =~ /^([a-zA-Z]|:-\)).*(?:[.?!]\)?| ...)/
   )
 end
 

@@ -105,8 +105,12 @@ when the backend encoding is *not* UTF-8.  I think I see how to
 get there once this patch is done, so I definitely would not like
 to introduce some comparable restriction in ecpg.
 
-			regards, tom lane), "I think I see how to get there once this patch is done, so I definitely would not like to introduce some comparable restriction in ecpg." ]
+			regards, tom lane), "I think I see how to get there once this patch is done, so I definitely would not like to introduce some comparable restriction in ecpg." ],
+    [ %q{I've not studied the test case too closely yet, other than to verify
+that it does fail without the code fix :-).  Other than that, though,
+I think this patch is committable for v11 through HEAD.
 
+			regards, tom lane}, "Other than that, though, I think this patch is committable for v11 through HEAD." ]
     ]
 
   tests.each do |(body, expected)|
