@@ -37,6 +37,6 @@ def find_last_sentence(email_body)
     end
     !stop
   end.reverse.map do |token|
-    token == "\n" ? " " : token
+    token =~ /\s+/ ? " " : token
   end.join.strip
 end
