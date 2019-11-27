@@ -3,14 +3,17 @@ def starts_sentence?(token)
 end
 
 def ends_sentence?(token)
-  # True if it is two newlines (we assume sentences won't span
-  # those), an ellipsis (as its own token since Tom separates it with
-  # a space), or is *not* an initialism/acronym and it does start with
-  # a letter and ends with a period, question mark or exclamation
-  # mark, optionally followed by a closing parenthesis.
-  token == "\n\n" || token == '...' || (
+  # True if it matches one set of specific tokens:
+  #  * two or more newlines (we assume sentences won't span those)
+  #  * an ellipsis (as its own token since Tom separates it with a space)
+  #  * a numbered footnote reference [1], [2], etc.
+  # Or it is *not* an initialism/acronym *and*
+  #  * starts with a letter
+  #  * ends with a period, question mark or exclamation mark
+  #    - optionally followed by a closing parenthesis
+  token =~ /\n\n+/ || token == '...' || token =~ /\[\d+\]/ || (
     token !~ /\A(?:[A-Z]\.)+\z/ &&
-    token =~ /^([a-zA-Z]|:-\)).*(?:[.?!]\)?| ...)/
+    token =~ /^([a-zA-Z]|:-\)).*(?:[.?!]\)?)$/
   )
 end
 

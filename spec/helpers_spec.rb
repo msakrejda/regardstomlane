@@ -118,7 +118,17 @@ sure.
 (Having said that, the end of the month isn't that far away,
 so it may well end up in the next CF anyway.)
 
-			regards, tom lane), "(Having said that, the end of the month isn't that far away, so it may well end up in the next CF anyway.)" ]
+			regards, tom lane), "(Having said that, the end of the month isn't that far away, so it may well end up in the next CF anyway.)" ],
+    [ %q(> That could be a way, yes. Any thoughts on this from others following this thread?
+
+I whined about this on the tz mailing list, and got the attention of
+the FreeBSD tzdata package maintainer [1].  It seems possible that he'll
+change that policy, so I'd advise doing nothing until that discussion
+settles.
+
+			regards, tom lane
+
+[1] https://mm.icann.org/pipermail/tz/2019-November/028633.html), "It seems possible that he'll change that policy, so I'd advise doing nothing until that discussion settles." ]
     ]
 
   tests.each do |(body, expected)|
