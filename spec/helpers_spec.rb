@@ -128,7 +128,13 @@ settles.
 
 			regards, tom lane
 
-[1] https://mm.icann.org/pipermail/tz/2019-November/028633.html), "It seems possible that he'll change that policy, so I'd advise doing nothing until that discussion settles." ]
+[1] https://mm.icann.org/pipermail/tz/2019-November/028633.html), "It seems possible that he'll change that policy, so I'd advise doing nothing until that discussion settles." ],
+    [ %q(So the change you propose isn't going to make it any closer
+to adhering to the letter of "defined-ness".  In practice, this code
+works fine on every platform that Postgres is ever likely to support,
+so I see no need to change it.
+
+			regards, tom lane), "In practice, this code works fine on every platform that Postgres is ever likely to support, so I see no need to change it." ]
     ]
 
   tests.each do |(body, expected)|

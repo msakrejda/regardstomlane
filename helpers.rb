@@ -13,7 +13,7 @@ def ends_sentence?(token)
   #    - optionally followed by a closing parenthesis
   token =~ /\n\n+/ || token == '...' || token =~ /\[\d+\]/ || (
     token !~ /\A(?:[A-Z]\.)+\z/ &&
-    token =~ /^([a-zA-Z]|:-\)).*(?:[.?!]\)?)$/
+    token =~ /^([a-zA-Z"]|:-\)).*(?:[.?!][\)"]?)$/
   )
 end
 
