@@ -134,7 +134,15 @@ to adhering to the letter of "defined-ness".  In practice, this code
 works fine on every platform that Postgres is ever likely to support,
 so I see no need to change it.
 
-			regards, tom lane), "In practice, this code works fine on every platform that Postgres is ever likely to support, so I see no need to change it." ]
+			regards, tom lane), "In practice, this code works fine on every platform that Postgres is ever likely to support, so I see no need to change it." ],
+    [ %q(>> Sounds sensible to me.  We don't yet have verification that this is
+>> even where the problem is ...
+
+> Done.
+
+?? I don't see any commit ...
+
+			regards, tom lane), "?? I don't see any commit ..." ]
     ]
 
   tests.each do |(body, expected)|
