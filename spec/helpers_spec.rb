@@ -142,7 +142,15 @@ so I see no need to change it.
 
 ?? I don't see any commit ...
 
-			regards, tom lane), "?? I don't see any commit ..." ]
+			regards, tom lane), "?? I don't see any commit ..." ],
+    # for multiple parenthesized sentences at the end, pick the last one
+    # but pull up the opening paren
+    [ %q((Having said that, I'm still about -0.5 or so on the idea.  But if
+we do it, we should do a count.)
+
+			regards, tom lane), "(But if we do it, we should do a count.)" ]
+
+
     ]
 
   tests.each do |(body, expected)|
