@@ -31,7 +31,7 @@ def find_last_sentence(email_body)
 
   # 3. Go backwards through tokens starting at right before signature
   previous = nil
-  parts.reverse.take_while do |token|
+  last_sentence = parts.reverse.take_while do |token|
     # 4. Stop at token that ends the previous sentence if the last
     #    token starts the current sentence
     stop = starts_sentence?(previous) && ends_sentence?(token)
@@ -42,4 +42,11 @@ def find_last_sentence(email_body)
   end.reverse.map do |token|
     token =~ /\s+/ ? " " : token
   end.join.strip
+
+  if last_sentence.end_with?(')') &&
+     !last_sentence.start_with?('(')
+    '(' + last_sentence
+  else
+    last_sentence
+  end
 end
