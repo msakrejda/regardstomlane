@@ -148,7 +148,14 @@ so I see no need to change it.
     [ %q((Having said that, I'm still about -0.5 or so on the idea.  But if
 we do it, we should do a count.)
 
-			regards, tom lane), "(But if we do it, we should do a count.)" ]
+			regards, tom lane), "(But if we do it, we should do a count.)" ],
+    [ %q(regression=# alter table foo add column r foorange;
+ERROR:  composite type foo cannot be made a member of itself
+
+The second patch needs to go back all the way, the first one
+only as far as we have partitions.
+
+			regards, tom lane), "The second patch needs to go back all the way, the first one only as far as we have partitions." ]
 
 
     ]

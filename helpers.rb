@@ -11,7 +11,7 @@ def ends_sentence?(token)
   #  * starts with a letter
   #  * ends with a period, question mark or exclamation mark
   #    - optionally followed by a closing parenthesis
-  token =~ /\n\n+/ || token == '...' || token =~ /\[\d+\]/ || (
+  token =~ /(?:(?:[\r\n]|\r\n)\s*){2}/ || token == '...' || token =~ /\[\d+\]/ || (
     token !~ /\A(?:[A-Z]\.)+\z/ &&
     token =~ /^([a-zA-Z"]|:-\)).*(?:[.?!][\)"]?)$/
   )
