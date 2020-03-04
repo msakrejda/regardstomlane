@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.5'
 
-gem 'puma'
+gem 'puma', '>= 4.3.3'
 gem 'sinatra'
 gem 'mail'
 gem 'twitter'

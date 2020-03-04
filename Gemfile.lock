@@ -27,7 +27,7 @@ GEM
     naught (1.1.0)
     nio4r (2.5.2)
     public_suffix (4.0.1)
-    puma (4.3.1)
+    puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.0.8)
     rack-protection (2.0.7)
@@ -73,7 +73,7 @@ PLATFORMS
 
 DEPENDENCIES
   mail
-  puma
+  puma (>= 4.3.3)
   rspec
   sinatra
   twitter
