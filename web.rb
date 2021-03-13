@@ -25,10 +25,7 @@ def verify_msg(token, timestamp, signature)
   signing_key = ENV.fetch('MAILGUN_PUBLIC_KEY')
   digest = OpenSSL::Digest::SHA256.new
   data = [timestamp, token].join
-  result = signature == OpenSSL::HMAC.hexdigest(digest, signing_key, data)
-
-  # for now ignore verification
-  result || true
+  signature == OpenSSL::HMAC.hexdigest(digest, signing_key, data)
 end
 
 post '/messages' do
@@ -61,6 +58,12 @@ post '/messages' do
 end
 
 post '/debug' do
+  token = params.fetch('token')
+  timestamp = params.fetch('timestamp')
+  signature = params.fetch('signature')
+  verified = verify_msg(token, timestamp, signature)
+  puts "message verifies: #{verified}"
+
   puts "received message:"
   puts params
 
