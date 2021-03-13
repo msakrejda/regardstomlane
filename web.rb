@@ -29,43 +29,48 @@ def verify_msg(token, timestamp, signature)
 end
 
 post '/messages' do
-  message = JSON.parse(request.body.read)
+  token = params.fetch('token')
+  timestamp = params.fetch('timestamp')
+  signature = params.fetch('signature')
+  verified = verify_msg(token, timestamp, signature)
+  unless verified
+    halt 401
+  end
+
   puts "received message:"
-  pp message
-  headers = message['headers']
-  if headers
-    from = headers.fetch('From', '')
-    list = headers.fetch('List-Id', '')
-    if from.include?(TOM_EMAIL) && MAILING_LISTS.any? { |l| list.include?(l) }
-      # TODO: check for html with fallback to plain just in case hell
-      # freezes over and Tom starts sending html e-mail
-      body = message['plain']
-      last_sentence = find_last_sentence(body)
-      if last_sentence
-        len = last_sentence.length
-        if len <= MAX_LEN
-          puts "tweeting last sentence (#{len} chars)"
-          twitter.update(last_sentence)
-          status 201
-        else
-          puts "last sentence too long (#{len} chars; max is #{MAX_LEN}); skipping"
-        end
+  pp params
+
+  from = params.fetch('from')
+  headers = Hash[JSON.parse(params.fetch('message-headers'))]
+  list = headers['List-Id']
+
+  if from.include?(TOM_EMAIL) && !list.nil? && MAILING_LISTS.any? { |l| list.include?(l) }
+    body = params.fetch('body-plain')
+    last_sentence = find_last_sentence(body)
+    if last_sentence
+      len = last_sentence.length
+      if len <= MAX_LEN
+        puts "tweeting last sentence (#{len} chars)"
+        twitter.update(last_sentence)
+        status 200
       else
-        puts "could not extract last sentence"
+        puts "last sentence too long (#{len} chars; max is #{MAX_LEN}); skipping"
       end
+    else
+      puts "could not extract last sentence"
     end
   end
 end
 
 post '/debug' do
+  puts "received message:"
+  puts params
+
   token = params.fetch('token')
   timestamp = params.fetch('timestamp')
   signature = params.fetch('signature')
   verified = verify_msg(token, timestamp, signature)
   puts "message verifies: #{verified}"
-
-  puts "received message:"
-  puts params
 
   puts "from: #{params.fetch('from')}"
   headers = Hash[JSON.parse(params.fetch('message-headers'))]
