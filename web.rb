@@ -3,14 +3,14 @@ require 'pp'
 require 'sinatra'
 require 'twitter'
 
+require 'openssl'
+
 require_relative 'helpers'
 
 $stdout.sync = $stderr.sync = true
 
 TOM_EMAIL = ENV.fetch("TOM_EMAIL")
 MAILING_LISTS = ENV.fetch("MAILING_LISTS").split(',')
-USERNAME = ENV.fetch("USERNAME")
-PASSWORD = ENV.fetch("PASSWORD")
 
 MAX_LEN = ENV.fetch("MAX_TWEET_LENGTH", 280)
 
@@ -21,8 +21,14 @@ twitter = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV.fetch('TWITTER_ACCESS_TOKEN_SECRET')
 end
 
-use Rack::Auth::Basic do |username, password|
-  username == USERNAME && password == PASSWORD
+def verify_msg(token, timestamp, signature)
+  signing_key = ENV.fetch('MAILGUN_PUBLIC_KEY')
+  digest = OpenSSL::Digest::SHA256.new
+  data = [timestamp, token].join
+  result = signature == OpenSSL::HMAC.hexdigest(digest, signing_key, data)
+
+  # for now ignore verification
+  result || true
 end
 
 post '/messages' do
