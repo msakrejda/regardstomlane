@@ -62,5 +62,10 @@ end
 
 post '/debug' do
   puts "received message:"
+  puts params
+  puts params.inspect
   pp params
+  pp params.class
+  pp params.inspect
+  status 200
 end
