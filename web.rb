@@ -22,7 +22,7 @@ twitter = Twitter::REST::Client.new do |config|
 end
 
 def verify_msg(token, timestamp, signature)
-  signing_key = ENV.fetch('MAILGUN_PUBLIC_KEY')
+  signing_key = ENV.fetch('MAILGUN_API_KEY')
   digest = OpenSSL::Digest::SHA256.new
   data = [timestamp, token].join
   signature == OpenSSL::HMAC.hexdigest(digest, signing_key, data)
