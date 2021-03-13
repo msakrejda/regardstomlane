@@ -63,9 +63,14 @@ end
 post '/debug' do
   puts "received message:"
   puts params
-  puts params.inspect
-  pp params
-  pp params.class
-  pp params.inspect
+
+  puts "from: #{params.fetch('from')}"
+  headers = Hash[JSON.parse(params.fetch('message-headers'))]
+  puts headers
+  list = headers['List-Id']
+  puts "list is: #{list}"
+  body = params.fetch('body-plain')
+  puts "body is: #{body}"
+
   status 200
 end
