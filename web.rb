@@ -53,3 +53,8 @@ post '/messages' do
     end
   end
 end
+
+post '/debug' do
+  puts "received message:"
+  pp params
+end
